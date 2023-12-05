@@ -4,35 +4,50 @@ import * as fs from 'fs';
 
 @Controller('v1')
 export class V1Controller {
-  @Get(':folderName/:fileName')
-  findAll(@Param('folderName') folderName: string, @Param('fileName') fileName: string): string {
-    const createFolderCommand = `mkdir ${folderName}`;
-    const fileContent = `
-    const a = 5
-    const b = a+8`;
-    exec('nest g resource products', (error, stdout) => {
+  @Get(':folderName')
+  findAll(@Param('folderName') folderName: string): string {
+    exec(`nest g resource ${folderName}`, (error, stdout) => {
       console.log(stdout);
       console.log(error);
-    });
-    exec(createFolderCommand, (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error creating folder: ${stderr}`);
-        return 'error';
-      }
+      const fileContent = `import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-      console.log(`Folder "${folderName}" created successfully.`);
+@Entity('${folderName}')
+export class CommentEntity {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-      // Step 2: Write a TypeScript file inside the folder
-      const filePath = `${folderName}/${fileName}`;
+  @Column({ nullable: true })
+  comment: string;
+}`;
+      const filePath = `src/${folderName}/entities/${folderName}.entity.ts`;
       fs.writeFile(filePath, fileContent, (err) => {
         if (err) {
           console.error(`Error writing TypeScript file: ${err}`);
           return;
         }
 
-        console.log(`TypeScript file "${fileName}" created successfully at "${folderName}".`);
+        console.log(`Folder "${folderName}" created successfully.`);
       });
     });
+    // exec(createFolderCommand, (error, stdout, stderr) => {
+    //   if (error) {
+    //     console.error(`Error creating folder: ${stderr}`);
+    //     return 'error';
+    //   }
+
+    //   console.log(`Folder "${folderName}" created successfully.`);
+
+    //   // Step 2: Write a TypeScript file inside the folder
+    //   const filePath = `${folderName}/${fileName}`;
+    //   fs.writeFile(filePath, fileContent, (err) => {
+    //     if (err) {
+    //       console.error(`Error writing TypeScript file: ${err}`);
+    //       return;
+    //     }
+
+    //     console.log(`TypeScript file "${fileName}" created successfully at "${folderName}".`);
+    //   });
+    // });
     return 'successful';
   }
 }
