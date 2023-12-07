@@ -8,6 +8,8 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CreateEntity } from './script/CreateEntity.script';
 import { CreateService } from './script/CreateService.script';
+import { CreateDto } from './script/CreateDto.script';
+
 @Module({
   imports: [
     // CreateEntity,
@@ -25,6 +27,6 @@ import { CreateService } from './script/CreateService.script';
     V1Module,
   ],
   controllers: [AppController, V1Controller],
-  providers: [AppService, V1Service, CreateEntity, CreateService],
+  providers: [AppService, V1Service, CreateEntity, CreateService, CreateDto],
 })
 export class AppModule {}

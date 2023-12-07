@@ -5,11 +5,13 @@ import createModule from 'src/components/modules/createModule';
 import { CreateEntity } from 'src/script/CreateEntity.script';
 import { TableDetails } from './DTO/createModule.dto';
 import { CreateService } from 'src/script/CreateService.script';
+import { CreateDto } from 'src/script/CreateDto.script';
 @Injectable()
 export class V1Service {
   constructor(
     private readonly createEntity: CreateEntity,
     private readonly createService: CreateService,
+    private readonly createDto: CreateDto,
   ) {}
   createResources(folderName: string, tableDescription: TableDetails[]): string {
     exec(`nest g resource ${folderName}`, (error) => {
@@ -18,6 +20,7 @@ export class V1Service {
       } else {
         this.createEntity.create(tableDescription, folderName);
         this.createService.create(folderName);
+        this.createDto.create(tableDescription, folderName);
       }
 
       const modulePath = `src/${folderName}/${folderName}.module.ts`;

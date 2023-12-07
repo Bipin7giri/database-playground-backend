@@ -1,6 +1,7 @@
 import Capitalized from 'src/utils/capitalized';
 import * as fs from 'fs';
 import { InternalServerErrorException } from '@nestjs/common';
+
 export class CreateController {
   private readonly name: string;
   constructor(name: string) {

@@ -2,6 +2,7 @@ import Capitalized from 'src/utils/capitalized';
 import { TableDetails } from 'src/v1/DTO/createModule.dto';
 import * as fs from 'fs';
 import { InternalServerErrorException } from '@nestjs/common';
+
 export class CreateEntity {
   async create(tableDescription: TableDetails[], name: string) {
     try {
@@ -20,6 +21,7 @@ export class CreateEntity {
           })
           .join('')}
       }`;
+
       const entityPath = `src/${name}/entities/${name}.entity.ts`;
       fs.writeFile(entityPath, entityContent, (err) => {
         if (err) {

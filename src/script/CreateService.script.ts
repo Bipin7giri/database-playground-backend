@@ -21,7 +21,7 @@ export class CreateService {
         ) {}
       
         create(data: Create${entity}Dto) {
-            return this.productRepository.create(data);
+            return this.${fileName}Repository.create(data);
           }
 
         findAll() {
