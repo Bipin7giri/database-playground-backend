@@ -18,7 +18,7 @@ const createModule = (folderName: string): string => {
             controllers: [${CapitalizeFolderName}Controller],
             providers: [${CapitalizeFolderName}Service],
           })
-          export class ProductModule {}`;
+          export class ${CapitalizeFolderName}Module {}`;
 };
 
 export default createModule;
