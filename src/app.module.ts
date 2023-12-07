@@ -6,9 +6,11 @@ import { V1Service } from './v1/v1.service';
 import { V1Module } from './v1/v1.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
+import { CreateEntity } from './script/CreateEntity.script';
+import { CreateService } from './script/CreateService.script';
 @Module({
   imports: [
+    // CreateEntity,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -23,6 +25,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     V1Module,
   ],
   controllers: [AppController, V1Controller],
-  providers: [AppService, V1Service],
+  providers: [AppService, V1Service, CreateEntity, CreateService],
 })
 export class AppModule {}
