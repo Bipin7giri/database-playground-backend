@@ -57,7 +57,7 @@ export class UsersService {
   }
 
   async findOne(email: string) {
-    console.log(email === 'admin@example.com');
+
     const data = await this.userRepository.findOne({
       where: { email: email },
       relations: {
