@@ -13,7 +13,7 @@ export class V1Service {
     private readonly createEntity: CreateEntity,
     private readonly createService: CreateService,
     private readonly createDto: CreateDto,
-    private readonly createController: CreateController,
+    private readonly createController: CreateController
   ) {}
   createResources(folderName: string, tableDescription: TableDetails[]): string {
     exec(`nest g resource ${folderName}`, (error) => {
