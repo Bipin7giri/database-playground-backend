@@ -41,7 +41,7 @@ export class UsersController {
     private readonly userService: UsersService,
     private authService: AuthService,
     private imageUploadService: ImageUploadSerive
-  ) {}
+  ) { }
 
   @Get('/me')
   @UseGuards(AuthGuard('jwt'))
