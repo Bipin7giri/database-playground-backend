@@ -16,7 +16,7 @@ export class V1Service {
     private readonly createController: CreateController,
   ) {}
   createResources(folderName: string, tableDescription: TableDetails[]): string {
-    exec(`npm i nest`, (error) => {
+    exec(`npm install @nestjs/cli --save-dev`, (error) => {
       if (error) {
         throw new InternalServerErrorException(error.message);
       }
