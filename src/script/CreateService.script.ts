@@ -21,7 +21,7 @@ export class CreateService {
         ) {}
       
         create(data: Create${entity}Dto) {
-            return this.${fileName}Repository.create(data);
+            return this.${fileName}Repository.save(data);
           }
 
         findAll() {

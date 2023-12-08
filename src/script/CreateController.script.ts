@@ -10,38 +10,47 @@ export class CreateController {
   async create(name: string) {
     try {
       const fileName: string = name;
-      const entity = Capitalized(name);
-      const controllerService: string = `import { Injectable } from '@nestjs/common';
-      import { CreateProductDto } from './dto/create-${fileName}.dto';
-      import { UpdateProductDto } from './dto/update-${fileName}.dto';
-      @Injectable()
-      export class ${entity}Service {
-        constructor(
-          @InjectRepository(Category)
-          private readonly ${fileName}Repository: Repository<${entity}>,
-        ) {}
-      
-        findAll() {
-          return this.${fileName}Repository.find();
-        }
-      
-        findOne(id: number) {
-          return this.${fileName}Repository.findOne(id);
-        }
-      
-        update(id: number, update${entity}Dto: Update${entity}Dto) {
-          return this.${fileName}Repository.update(id, update${entity}Dto);
-        }
-      
-        remove(id: number) {
-          return this.${fileName}Repository.update(id, {
-            deleted: true,
-          });
-        }
-      }`;
+      const fileNameCapitalized = Capitalized(name);
+      const controllerContent: string = `import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { ${fileNameCapitalized}Service } from './${fileName}.service';
+import { Create${fileNameCapitalized}Dto } from './dto/create-${fileName}.dto';
+import { Update${fileNameCapitalized}Dto } from './dto/update-${fileName}.dto';
+import { ApiTags } from '@nestjs/swagger';
 
-      const entityPath = `src/${name}/controller/${name}.entity.ts`;
-      fs.writeFile(entityPath, controllerService, (err) => {
+@ApiTags('${fileName}')
+@Controller('${fileName}')
+export class ${fileNameCapitalized}Controller {
+  constructor(private readonly ${fileName}Service: ${fileNameCapitalized}Service) {}
+
+  @Post()
+  create(@Body() create${fileNameCapitalized}Dto: Create${fileNameCapitalized}Dto) {
+    return this.${fileName}Service.create(create${fileNameCapitalized}Dto);
+  }
+
+  @Get()
+  findAll() {
+    return this.${fileName}Service.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.${fileName}Service.findOne(+id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() update${fileNameCapitalized}Dto: Update${fileNameCapitalized}Dto) {
+    return this.${fileName}Service.update(+id, update${fileNameCapitalized}Dto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.${fileName}Service.remove(+id);
+  }
+}
+`;
+
+      const controllerPath = `src/${name}/${name}.controller.ts`;
+      fs.writeFile(controllerPath, controllerContent, (err) => {
         if (err) {
           throw new InternalServerErrorException(err.message);
         }
