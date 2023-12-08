@@ -15,19 +15,19 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { AdminAuto, CreateUserDto, LoginDto } from 'src/defaultmodule/users/dto/create-user.dto';
-import { UsersService } from 'src/defaultmodule/users/users.service';
+import { AdminAuto, CreateUserDto, LoginDto } from '../../defaultmodule/users/dto/create-user.dto';
+import { UsersService } from '../../defaultmodule/users/users.service';
 import { AuthGuard } from '@nestjs/passport';
-import { AuthService } from 'src/auth/auth.service';
-import { HasRoles } from 'src/auth/has-roles.decorator';
-import { CurrentUser } from 'src/auth/current-user.decorator';
-import { RolesGuard } from 'src/auth/roles.guard';
+import { AuthService } from '../../auth/auth.service';
+import { HasRoles } from '../../auth/has-roles.decorator';
+import { CurrentUser } from '../../auth/current-user.decorator';
+import { RolesGuard } from '../../auth/roles.guard';
 // import { Role } from './entities/user.entity';
 import { Role } from '../../constants/roles.enum';
 import { Paginate, PaginateQuery } from 'nestjs-paginate';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { v2 as cloudinary } from 'cloudinary';
-import { ImageUploadSerive } from 'src/imageupload.service';
+import { ImageUploadSerive } from '../../imageupload.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 cloudinary.config({
   cloud_name: 'dr54a7gze',
@@ -40,8 +40,8 @@ export class UsersController {
   constructor(
     private readonly userService: UsersService,
     private authService: AuthService,
-    private imageUploadService: ImageUploadSerive
-  ) { }
+    private imageUploadService: ImageUploadSerive,
+  ) {}
 
   @Get('/me')
   @UseGuards(AuthGuard('jwt'))
@@ -79,7 +79,7 @@ export class UsersController {
   async updateUserMe(
     @CurrentUser() currentUser: any,
     @Body() updateUser: UpdateUserDto,
-    @UploadedFile() file: Express.Multer.File
+    @UploadedFile() file: Express.Multer.File,
   ) {
     const imageuploadUrl = await this.imageUploadService.uploadImage(file?.path);
     updateUser.avatar = imageuploadUrl;

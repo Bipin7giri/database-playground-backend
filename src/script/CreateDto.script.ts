@@ -1,7 +1,7 @@
 import { InternalServerErrorException } from '@nestjs/common';
-import { TableDetails } from 'src/v1/DTO/createModule.dto';
+import { TableDetails } from '../v1/DTO/createModule.dto';
 import * as fs from 'fs';
-import Capitalized from 'src/utils/capitalized';
+import Capitalized from '../utils/capitalized';
 
 // ${item?.dataType == 'text' && '@IsString()'}
 // ${item?.dataType == 'integer' && '@IsNumber()'}

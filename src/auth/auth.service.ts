@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { HashService } from 'src/helper/hash.services';
+import { HashService } from '../helper/hash.services';
 import { UsersService } from '../defaultmodule/users/users.service';
 import * as dotenv from 'dotenv';
 dotenv.config();
@@ -9,7 +9,7 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private hashService: HashService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
   ) {}
 
   async validateUser(email: string, pass: string): Promise<any> {
@@ -17,7 +17,7 @@ export class AuthService {
     if (user) {
       const checkIfCorrectPassword = await this.hashService.comparePassword(
         pass,
-        user.userCredentialId?.password
+        user.userCredentialId?.password,
       );
       if (!checkIfCorrectPassword) {
         throw new UnauthorizedException('Incorrect password');

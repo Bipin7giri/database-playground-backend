@@ -14,10 +14,10 @@ import { RolesService } from './roles.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { HasRoles } from 'src/auth/has-roles.decorator';
+import { HasRoles } from '../auth/has-roles.decorator';
 import { Role } from '../constants/roles.enum';
 import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from 'src/auth/roles.guard';
+import { RolesGuard } from '../auth/roles.guard';
 import { Paginate, PaginateQuery } from 'nestjs-paginate';
 @ApiTags('roles')
 @Controller('roles')

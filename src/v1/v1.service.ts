@@ -1,19 +1,19 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { exec } from 'child_process';
 import * as fs from 'fs';
-import createModule from 'src/components/modules/createModule';
-import { CreateEntity } from 'src/script/CreateEntity.script';
+import createModule from '../components/modules/createModule';
+import { CreateEntity } from '../script/CreateEntity.script';
 import { TableDetails } from './DTO/createModule.dto';
-import { CreateService } from 'src/script/CreateService.script';
-import { CreateDto } from 'src/script/CreateDto.script';
-import { CreateController } from 'src/script/CreateController.script';
+import { CreateService } from '../script/CreateService.script';
+import { CreateDto } from '../script/CreateDto.script';
+import { CreateController } from '../script/CreateController.script';
 @Injectable()
 export class V1Service {
   constructor(
     private readonly createEntity: CreateEntity,
     private readonly createService: CreateService,
     private readonly createDto: CreateDto,
-    private readonly createController: CreateController
+    private readonly createController: CreateController,
   ) {}
   createResources(folderName: string, tableDescription: TableDetails[]): string {
     exec(`nest g resource ${folderName}`, (error) => {

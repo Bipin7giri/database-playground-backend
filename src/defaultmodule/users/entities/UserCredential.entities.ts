@@ -1,5 +1,5 @@
-import { User } from 'src/AllEntites';
-import { SoftDelete } from 'src/AllEntites/HelperEntites/SoftDelete.entites';
+import { User } from '../../users/entities/user.entity';
+import { SoftDelete } from '../../../AllEntites/HelperEntites/SoftDelete.entites';
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()

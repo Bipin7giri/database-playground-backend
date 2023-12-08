@@ -8,6 +8,6 @@ export class EntityNameService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-    private readonly roleRepository: Repository<Role>
+    private readonly roleRepository: Repository<Role>,
   ) {}
 }

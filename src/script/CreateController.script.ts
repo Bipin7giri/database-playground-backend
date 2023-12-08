@@ -1,4 +1,4 @@
-import Capitalized from 'src/utils/capitalized';
+import Capitalized from '../utils/capitalized';
 import * as fs from 'fs';
 import { InternalServerErrorException } from '@nestjs/common';
 

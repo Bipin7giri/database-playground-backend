@@ -1,5 +1,5 @@
-import Capitalized from 'src/utils/capitalized';
-import { TableDetails } from 'src/v1/DTO/createModule.dto';
+import Capitalized from '../utils/capitalized';
+import { TableDetails } from '../v1/DTO/createModule.dto';
 import * as fs from 'fs';
 import { InternalServerErrorException } from '@nestjs/common';
 

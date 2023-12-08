@@ -14,7 +14,7 @@ export class UsersService {
     @InjectRepository(Role) private readonly roleRepository: Repository<Role>,
     @InjectRepository(UserCredential)
     private readonly userCredential: Repository<UserCredential>,
-    private hashService: HashService
+    private hashService: HashService,
   ) {}
 
   public findAll(query: PaginateQuery): Promise<Paginated<User>> {
@@ -57,7 +57,6 @@ export class UsersService {
   }
 
   async findOne(email: string) {
-
     const data = await this.userRepository.findOne({
       where: { email: email },
       relations: {
