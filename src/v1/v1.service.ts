@@ -16,6 +16,11 @@ export class V1Service {
     private readonly createController: CreateController,
   ) {}
   createResources(folderName: string, tableDescription: TableDetails[]): string {
+    exec(`npm i nest`, (error) => {
+      if (error) {
+        throw new InternalServerErrorException(error.message);
+      }
+    });
     exec(`nest g resource ${folderName}`, (error) => {
       if (error) {
         throw new InternalServerErrorException(error.message);
